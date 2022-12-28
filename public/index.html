@@ -22,15 +22,30 @@
          </head>
             <body >
                 <p>Hello World, i hope that you are well todya</p>
+                
                 <form id="user_form" >      
-                   
                         <label>Restful api</label>
                         <br/>
                         <label>GET</label>
-                        <input id="get_request" type="text" placeholder ="get movies">
-                        <input id="getButton" name ="getButton" value="Submit" type="submit">  
+                        <br/>
+                        <button id="getButton" name ="getButton" value="Submit" type="submit">Get Movies</button>  
                 </form>
-                <p>Movies in Database:</p>
+
+                <form id="user_form_post">
+                    <label>POST</label>
+                    <br/>
+                    <label>movie title</label>
+                    <input id="movieInput" type="text" name="movieTitle" placeholder="post movie"/>
+                    <label>movie director</label>
+                    <input id="directorInput" type="text" name="movieDirector" placeholder="post director"/>
+                    <button id="postButton" name ="postButton" method="POST">POST</button> 
+                    <br/>
+                   
+                
+                </form>
+
+
+                                <p>Movies in Database:</p>
                 <div id="results">
 
                 </div>
