@@ -1,22 +1,27 @@
 ///for GET form data from index.html in public folder
 
-var getButton=document.getElementById("user_form");
+var getButton=document.getElementById("user_form_get");
 getButton.addEventListener("submit", getRequest);
 
 function getRequest(event) {
     event.preventDefault();
-    fetch('/movies')
+    var movieId = event.target.elements.movieId.value;
+    fetch(`/movies/${movieId}` )
        .then(function(response) {
          return response.json();
         })
        .then(function(data) {
-         for(var i in data) {
-            document.getElementById("results").innerHTML += data[i].movieTitle + '<br/>';
-         }
-        
-        
-        console.log(JSON.stringify(data));
-        
+            if(!movieId) {
+                
+                for(var i in data) {
+                    document.getElementById("results").innerHTML += data[i].movieTitle + '<br/>';
+                }  
+                console.log(JSON.stringify(data));
+            }
+            else {
+                document.getElementById("results").innerHTML += data.movieTitle + '<br/>';
+                console.log(JSON.stringify(data));
+            }
         })
 };
 
@@ -64,4 +69,25 @@ function newPost(post) {
 
   //  console.log(movieTitle, movieDirector);
 }
-       
+
+//delete button
+var deleteButton=document.getElementById("user_form_delete");
+deleteButton.addEventListener("submit", deletePost);
+
+function deletePost(event) {
+    event.preventDefault();
+    var movieId = event.target.elements.movieId.value;
+    console.log('movie', movieId);
+    const options = {
+        method: 'DELETE',
+        headers:  new Headers({ 
+            'Content-Type': 'application/json' 
+        }), 
+        body: JSON.stringify({ movieId: movieId })
+    }
+    const URL = `/movies/${movieId}`;
+
+    fetch(URL, options)
+           .then(res =>res.json())
+           .then(data =>console.log('movie to delete', data))
+}   

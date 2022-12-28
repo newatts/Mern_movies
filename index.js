@@ -1,3 +1,4 @@
+
 const mongoose = require('mongoose');
 const express = require('express')  ;
 const validate = require('./validate.js');
@@ -5,6 +6,7 @@ const moviesRouter = require('./routes/movies.js');
 const app = express() ; 
 const PORT = process.env.PORT||3000;
 const DATABASE_URL = process.env.DATABASE_URL || 'mongodb://127.0.0.1:27017';
+
 
 app.use(express.static('public'));
 
