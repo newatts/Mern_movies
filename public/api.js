@@ -69,6 +69,57 @@ function newPost(post) {
 
   //  console.log(movieTitle, movieDirector);
 }
+//end of post
+
+var putButton=document.getElementById("user_form_put");
+putButton.addEventListener("submit", putPost);
+
+function putPost(event) {
+    event.preventDefault();
+    var movieTitle = event.target.movieTitle.value;
+   /*  var movieYear = event.target.movieYear.value;
+    var movieGenre = event.target.movieGenre.value; */
+    var movieDirector = event.target.movieDirector.value;
+   /*  var movieWriter = event.target.movieWriter.value;
+    var movieActor = event.target.movieActor.value;
+    var movieCountry = event.target.movieCountry.value;
+    var movieDirectorCountry = event.target.movieDirectorCountry.value;
+     */
+    var movieId = event.target.movieId.value;
+
+   /*  console.log('movieId: ', movieId);
+    console.log('movieTitle: ', movieTitle);
+    console.log('movieDirector: ', movieDirector); */
+
+    post={
+        movieTitle:movieTitle,
+        movieId:movieId,
+               /*  movieYear:movieYear,
+                movieGenre:movieGenre, */
+                movieDirector:movieDirector,
+               /*  movieWriter:movieWriter,
+                movieActor:movieActor,
+                movieCountry:movieCountry,
+                movieDirectorCountry:movieDirectorCountry
+              
+ */
+    }
+    //defines if post or put... etc.  PUT whole record, patch only part of record
+    const options = {
+        method: 'PATCH',
+        body: JSON.stringify(post),
+        headers:  new Headers({ 'Content-Type': 'application/json' }) 
+    }
+    const URL = `/movies/${movieId}`;
+    return fetch(URL, options)
+           .then(res =>res.json())
+            .then(data =>console.log('movier to update :', data))
+            .then(error => console.log('error: ', error));
+
+  //  console.log(movieTitle, movieDirector);
+}
+//////////PUT///////////////ebds
+
 
 //delete button
 var deleteButton=document.getElementById("user_form_delete");
