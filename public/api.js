@@ -1,5 +1,7 @@
 ///for GET form data from index.html in public folder
 
+//import { off } from '../models/movie';
+
 var getButton=document.getElementById("user_form_get");
 getButton.addEventListener("submit", getRequest);
 
@@ -12,16 +14,19 @@ function getRequest(event) {
         })
        .then(function(data) {
             if(!movieId) {
-                
+                //clear the list   
+                document.getElementById("results").innerHTML="";
                 for(var i in data) {
                     document.getElementById("results").innerHTML += data[i].movieTitle + '<br/>';
                 }  
-                console.log(JSON.stringify(data));
             }
             else {
+                console.log('movieId: ', movieId);
+                document.getElementById("results").innerHTML="";
                 document.getElementById("results").innerHTML += data.movieTitle + '<br/>';
-                console.log(JSON.stringify(data));
+               
             }
+            console.log('data:',data);
         })
 };
 
@@ -33,17 +38,19 @@ function getRequest(event) {
 var postButton=document.getElementById("user_form_post");
 postButton.addEventListener("submit", newPost);
 
-function newPost(post) {
-    post.preventDefault();
-    var movieTitle = post.target.movieTitle.value;
+function newPost(event) {
+    event.preventDefault();
+    var movieTitle = event.target.movieTitle.value;
    /*  var movieYear = event.target.movieYear.value;
     var movieGenre = event.target.movieGenre.value; */
-    var movieDirector = post.target.movieDirector.value;
+    var movieDirector = event.target.movieDirector.value;
    /*  var movieWriter = event.target.movieWriter.value;
     var movieActor = event.target.movieActor.value;
     var movieCountry = event.target.movieCountry.value;
     var movieDirectorCountry = event.target.movieDirectorCountry.value;
      */
+    ///////cheking input
+    console.log(movieTitle, movieDirector);
 
     post={
         movieTitle:movieTitle,
@@ -68,6 +75,7 @@ function newPost(post) {
             .then(error => console.log('error: ', error));
 
   //  console.log(movieTitle, movieDirector);
+    //no validation
 }
 //end of post
 

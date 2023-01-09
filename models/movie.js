@@ -1,4 +1,6 @@
 const mongoose = require('mongoose');
+const express = require('express');
+const router = express.Router();
 
 const movieSchema = new mongoose.Schema({
     
@@ -26,4 +28,4 @@ const movieSchema = new mongoose.Schema({
     }
 });  
    
-module.exports = mongoose.model('Movie', movieSchema);
+module.exports = mongoose.model('movie', movieSchema);
